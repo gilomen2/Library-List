@@ -22,9 +22,6 @@ local function get_locations(...)
 	end
 	return libraries
 end
-local first_result = get_locations().results[1]
-local second_result = get_locations().results[2]
-local third_result = get_locations().results[3]
 local function get_sms(location)
 	channel.say("Would you like to get this information as a text message? Press 1 for yes or any other number for no.")
 	local yes_or_no = channel.gather()
@@ -32,7 +29,7 @@ local function get_sms(location)
 		channel.say("Enter your ten digit phone number followed by the pound sign.")
 		local caller_number = channel.gather()
 		local to = "+1"..caller_number
-		local from = "+15555555555"
+		local from = "+14145337983"
 		local message = location.name.."/n"..location.vicinity
 		sms.send(to, message, from)
 		channel.say("Great. Check your messages. Goodbye!")
@@ -42,15 +39,15 @@ local function get_sms(location)
 end
 local function say_location_info(x)
 	if x == 1 then
-		location = first_result
+		location = get_locations().results[1]
 		channel.say("The closest library is ".. location.name)
 		get_sms(location)
 	elseif x == 2 then
-		location = second_result
+		location = get_locations().results[2]
 		channel.say("The second closest library is ".. location.name)
 		get_sms(location)
 	else
-		location = third_result
+		location = get_locations().results[3]
 		channel.say("The third closest library is ".. location.name)
 		get_sms(location)
 	end
