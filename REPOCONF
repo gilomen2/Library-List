@@ -1,0 +1,5 @@
+# Coverage percentage
+# The push hook will reject the incoming app
+# if the test code coverage is less than this percentage
+coverage: 0
+
