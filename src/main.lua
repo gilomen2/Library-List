@@ -31,8 +31,14 @@ local function get_sms(location)
 		local to = "+1"..caller_number
 		local from = "+14145337983"
 		local message = location.name.."/n"..location.vicinity
-		sms.send(to, message, from)
-		channel.say("Great. Check your messages. Goodbye!")
+		local ok, err = sms.send(to, message, from)
+		if not err then
+			channel.say("Great. Check your messages. Goodbye!")
+		end
+		if err then
+			channel.say("I'm sorry. We weren't able to send the message. Goodbye.")
+			channel.hangup()
+		end
 	else
 		channel.say("Goodbye!")
 	end
